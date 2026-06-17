@@ -25,7 +25,7 @@ const pdfs = readdirSync(join(process.cwd(), 'public/notes'))
     {pdfs.map(({ filename, label, date }) => (
       <li>
         {date && <span class="note-date">{date.display}</span>}
-        <a class="note-title" href={`${import.meta.env.BASE_URL}notes/${filename}`}>{label}</a>
+        <a class="note-title" href={`/notes/${filename}`}>{label}</a>
       </li>
     ))}
   </ul>

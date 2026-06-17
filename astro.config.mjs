@@ -2,8 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://vinayak-vikram.github.io',
-  base: '/vinayakv.dev',
+  site: 'https://vinayakv.dev',
   output: 'static',
   markdown: {
     syntaxHighlight: 'shiki',
