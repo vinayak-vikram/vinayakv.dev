@@ -1,0 +1,326 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  background-color: #eef4fb;
+  color: #1a1a2e;
+  line-height: 1.75;
+}
+
+a {
+  color: #2a6cb0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout */
+header, main, footer {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header */
+header {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #c2d9f0;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: normal;
+  letter-spacing: 0.01em;
+}
+
+header h1 a {
+  color: #1a1a2e;
+}
+
+header nav {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #4a6fa5;
+}
+
+header nav a {
+  margin-right: 1.2rem;
+  color: #4a6fa5;
+}
+
+/* Main */
+main {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  min-height: calc(100vh - 200px);
+}
+
+/* Post list */
+.post-list {
+  list-style: none;
+}
+
+.post-list li {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #c2d9f0;
+}
+
+.post-list li:last-child {
+  border-bottom: none;
+}
+
+.post-list .post-date {
+  font-size: 0.85rem;
+  color: #6b88a8;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.post-list .post-title {
+  font-size: 1.25rem;
+}
+
+.post-list .post-excerpt {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: #3a4a60;
+}
+
+/* Individual post */
+.post-header {
+  margin-bottom: 2rem;
+}
+
+.post-header h1 {
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: 1.3;
+}
+
+.post-header .post-date {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #6b88a8;
+}
+
+.post-body p {
+  margin-bottom: 1.25rem;
+}
+
+.post-body h2 {
+  font-size: 1.45rem;
+  font-weight: normal;
+  margin: 2rem 0 0.75rem;
+  color: #2a4a70;
+}
+
+.post-body h3 {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 1.5rem 0 0.5rem;
+  color: #2a4a70;
+}
+
+.post-body h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 1.25rem 0 0.4rem;
+  color: #2a4a70;
+}
+
+.post-body ul, .post-body ol {
+  margin: 0 0 1.25rem 1.5rem;
+}
+
+.post-body li {
+  margin-bottom: 0.3rem;
+}
+
+.post-body blockquote {
+  border-left: 3px solid #a0c4e8;
+  padding-left: 1rem;
+  color: #4a6080;
+  margin: 1.25rem 0;
+}
+
+.post-body pre {
+  margin: 1.25rem 0;
+  border-radius: 4px;
+  overflow: auto;
+  background: #f6f8fa !important;
+  border: 1px solid #c2d9f0;
+  padding: 1rem !important;
+  font-size: 0.88rem;
+}
+
+.post-body code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+  background: #dceaf7;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+.post-body pre code {
+  background: none;
+  padding: 0;
+  font-size: 1em;
+}
+
+/* GitHub repo cards */
+.github-card {
+  display: block;
+  border: 1px solid #c2d9f0;
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  margin: 1.5rem 0;
+  text-decoration: none;
+  color: inherit;
+  background: #f4f9ff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.github-card:hover {
+  border-color: #4a6fa5;
+  box-shadow: 0 3px 10px rgba(42, 108, 176, 0.1);
+  text-decoration: none;
+}
+
+.gh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.gh-title {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+  color: #2a6cb0;
+}
+
+.gh-stars {
+  font-size: 0.85rem;
+  color: #6b88a8;
+}
+
+.gh-description {
+  font-size: 0.9rem;
+  color: #3a4a60;
+  margin: 0.3rem 0 0.6rem;
+}
+
+.gh-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #6b88a8;
+}
+
+.gh-lang::before {
+  content: "● ";
+  color: #4a6fa5;
+}
+
+/* Notes list */
+.notes-list {
+  list-style: none;
+}
+
+.notes-list li {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid #c2d9f0;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+}
+
+.notes-list li:last-child {
+  border-bottom: none;
+}
+
+.notes-list .note-date {
+  font-size: 0.85rem;
+  color: #6b88a8;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notes-list .note-title {
+  font-size: 1.1rem;
+}
+
+/* PDF viewer */
+.pdf-viewer {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 240px);
+  min-height: 500px;
+  border: 1px solid #c2d9f0;
+  border-radius: 4px;
+}
+
+/* File blocks */
+.file-block {
+  margin: 1.5rem 0;
+  border: 1px solid #c2d9f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.file-block summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: #dceaf7;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85rem;
+  color: #2a4a70;
+}
+
+.file-block summary::-webkit-details-marker { display: none; }
+
+.file-block summary::before {
+  content: '▶';
+  font-size: 0.65rem;
+  color: #4a6fa5;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.file-block[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.file-block summary:hover {
+  background: #cde0f2;
+}
+
+.file-block pre {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-top: 1px solid #c2d9f0 !important;
+  max-height: 480px;
+  overflow: auto !important;
+}
+
+/* Footer */
+footer {
+  padding: 1.5rem 1.5rem;
+  border-top: 1px solid #c2d9f0;
+  font-size: 0.85rem;
+  color: #6b88a8;
+  text-align: center;
+}

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { readdirSync } from 'fs';
+import { join } from 'path';
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function parseDate(filename: string): { display: string; ts: number } | null {
+  const m = filename.match(/_(\d{4})-(\d{2})-(\d{2})\.pdf$/);
+  if (!m) return null;
+  const [, y, mo, d] = m.map(Number);
+  return {
+    display: `${MONTHS[mo - 1]} ${d}, ${y}`,
+    ts: new Date(y, mo - 1, d).getTime(),
+  };
+}
+
+const pdfs = readdirSync(join(process.cwd(), 'public/notes'))
+  .filter(f => f.endsWith('.pdf'))
+  .map(f => ({ filename: f, label: f.replace(/_\d{4}-\d{2}-\d{2}\.pdf$/, '').replace(/\.pdf$/, ''), date: parseDate(f) }))
+  .sort((a, b) => (b.date?.ts ?? 0) - (a.date?.ts ?? 0));
+---
+<BaseLayout title="Notes — Vinayak Vikram">
+  <ul class="notes-list">
+    {pdfs.map(({ filename, label, date }) => (
+      <li>
+        {date && <span class="note-date">{date.display}</span>}
+        <a class="note-title" href={`${import.meta.env.BASE_URL}notes/${filename}`}>{label}</a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

@@ -1,0 +1,146 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href={base}>Vinayak Vikram</a></h1>
+      <nav>
+        <a href={base}>Blog</a>
+        <a href={`${base}notes`}>Notes</a>
+        <a href={`${base}about`}>About</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      &copy; 2026 Vinayak Vikram
+    </footer>
+
+    <script>
+      const BASE = import.meta.env.BASE_URL;
+
+      // === Prism.js — lazy loader for <file> blocks ===
+      type PrismState = 'idle' | 'loading' | 'ready';
+      let prismState: PrismState = 'idle';
+      const prismQueue: (() => void)[] = [];
+
+      function withPrism(fn: () => void) {
+        if (prismState === 'ready') { fn(); return; }
+        prismQueue.push(fn);
+        if (prismState === 'loading') return;
+        prismState = 'loading';
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css';
+        document.head.appendChild(link);
+
+        const core = document.createElement('script');
+        core.src = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js';
+        core.setAttribute('data-manual', '');
+        core.onload = () => {
+          const al = document.createElement('script');
+          al.src = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js';
+          al.onload = () => {
+            prismState = 'ready';
+            prismQueue.forEach(cb => cb());
+            prismQueue.length = 0;
+          };
+          document.body.appendChild(al);
+        };
+        document.body.appendChild(core);
+      }
+
+      // === <file> tag — collapsible fetched code blocks ===
+      const extLang: Record<string, string> = {
+        py: 'python', js: 'javascript', ts: 'typescript',
+        cpp: 'cpp', cc: 'cpp', cxx: 'cpp', c: 'c', h: 'cpp', hpp: 'cpp',
+        rs: 'rust', go: 'go', java: 'java', rb: 'ruby',
+        yaml: 'yaml', yml: 'yaml',
+        json: 'json', xml: 'xml', md: 'markdown',
+        sh: 'bash', bash: 'bash', cmake: 'cmake',
+      };
+
+      document.querySelectorAll('file').forEach(tag => {
+        const path = tag.textContent!.trim();
+        const filename = path.split('/').pop()!;
+        const ext = filename.includes('.') ? filename.split('.').pop()!.toLowerCase() : '';
+        const lang = extLang[ext] || '';
+
+        const details = document.createElement('details');
+        details.className = 'file-block';
+
+        const summary = document.createElement('summary');
+        summary.textContent = filename;
+        details.appendChild(summary);
+
+        const pre = document.createElement('pre');
+        const code = document.createElement('code');
+        if (lang) code.className = 'language-' + lang;
+        pre.appendChild(code);
+        details.appendChild(pre);
+
+        tag.replaceWith(details);
+
+        fetch(BASE + path.replace(/^\//, ''))
+          .then(r => { if (!r.ok) throw new Error(String(r.status)); return r.text(); })
+          .then(text => {
+            code.textContent = text;
+            withPrism(() => (window as any).Prism.highlightElement(code));
+          })
+          .catch(() => {
+            code.textContent = '(could not load ' + path + ')';
+            (code as HTMLElement).style.color = '#6b88a8';
+          });
+      });
+
+      // === <github> tag — repo cards ===
+      document.querySelectorAll('github').forEach(tag => {
+        const repoPath = tag.textContent!.trim();
+
+        const card = document.createElement('a');
+        card.className = 'github-card';
+        card.href = 'https://github.com/' + repoPath;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.innerHTML = '<div style="color:#6b88a8;font-size:0.9rem">Loading ' + repoPath + '...</div>';
+
+        tag.replaceWith(card);
+
+        fetch('https://api.github.com/repos/' + repoPath)
+          .then(r => r.json())
+          .then(data => {
+            card.innerHTML =
+              '<div class="gh-header">' +
+                '<span class="gh-title">' + data.full_name + '</span>' +
+                '<span class="gh-stars">★ ' + data.stargazers_count + '</span>' +
+              '</div>' +
+              '<p class="gh-description">' + (data.description || 'No description provided.') + '</p>' +
+              '<div class="gh-footer">' +
+                '<span class="gh-lang">' + (data.language || 'Plain') + '</span>' +
+                '<span class="gh-link">View on GitHub ↗</span>' +
+              '</div>';
+          })
+          .catch(() => {
+            card.innerHTML = '<div class="gh-error">' + repoPath + '</div>';
+          });
+      });
+    </script>
+  </body>
+</html>

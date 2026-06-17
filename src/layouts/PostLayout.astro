@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  date: string;
+}
+const { title, date } = Astro.props;
+---
+<BaseLayout title={`${title} — Vinayak Vikram`}>
+  <div class="post-header">
+    <h1>{title}</h1>
+    <p class="post-date">{date}</p>
+  </div>
+  <div class="post-body">
+    <slot />
+  </div>
+</BaseLayout>
