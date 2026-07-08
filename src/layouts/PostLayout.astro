@@ -4,13 +4,23 @@ import BaseLayout from './BaseLayout.astro';
 interface Props {
   title: string;
   date: string;
+  authors?: string[];
 }
-const { title, date } = Astro.props;
+const { title, date, authors } = Astro.props;
+
+function formatAuthors(names: string[]) {
+  if (names.length === 1) return names[0];
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
+}
 ---
 <BaseLayout title={`${title} — Vinayak Vikram`}>
   <div class="post-header">
     <h1>{title}</h1>
     <p class="post-date">{date}</p>
+    {authors && authors.length > 0 && (
+      <p class="post-authors">By {formatAuthors(authors)}</p>
+    )}
   </div>
   <div class="post-body">
     <slot />

@@ -110,8 +110,23 @@ main {
   color: #6b88a8;
 }
 
+.post-header .post-authors {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  color: #6b88a8;
+}
+
 .post-body p {
   margin-bottom: 1.25rem;
+}
+
+.post-body img,
+.post-body svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 4px;
 }
 
 .post-body h2 {
