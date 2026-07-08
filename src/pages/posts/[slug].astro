@@ -11,6 +11,11 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+
+if (post.data.redirect) {
+  return Astro.redirect(post.data.redirect, 301);
+}
+
 const { Content } = await render(post);
 ---
 <PostLayout title={post.data.title} date={post.data.date} authors={post.data.authors}>
