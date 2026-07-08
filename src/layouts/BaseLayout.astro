@@ -43,10 +43,17 @@ const { title } = Astro.props;
         if (prismState === 'loading') return;
         prismState = 'loading';
 
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css';
-        document.head.appendChild(link);
+        const lightLink = document.createElement('link');
+        lightLink.rel = 'stylesheet';
+        lightLink.media = '(prefers-color-scheme: light)';
+        lightLink.href = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css';
+        document.head.appendChild(lightLink);
+
+        const darkLink = document.createElement('link');
+        darkLink.rel = 'stylesheet';
+        darkLink.media = '(prefers-color-scheme: dark)';
+        darkLink.href = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css';
+        document.head.appendChild(darkLink);
 
         const core = document.createElement('script');
         core.src = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js';
