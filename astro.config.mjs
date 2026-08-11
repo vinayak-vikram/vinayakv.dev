@@ -2,13 +2,17 @@
 import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import rehypeExternalLinks from 'rehype-external-links';
 
 export default defineConfig({
   site: 'https://vinayakv.dev',
   output: 'static',
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [
+      rehypeKatex,
+      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+    ],
     syntaxHighlight: 'shiki',
     shikiConfig: {
       themes: {
