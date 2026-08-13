@@ -5,17 +5,31 @@ import 'katex/dist/katex.min.css';
 interface Props {
   title: string;
   date: string;
+  description?: string;
   authors?: string[];
 }
-const { title, date, authors } = Astro.props;
+const { title, date, description, authors } = Astro.props;
 
 function formatAuthors(names: string[]) {
   if (names.length === 1) return names[0];
   if (names.length === 2) return `${names[0]} and ${names[1]}`;
   return `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
 }
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  datePublished: new Date(date).toISOString(),
+  ...(description && { description }),
+  author: (authors && authors.length > 0 ? authors : ['Vinayak Vikram']).map(name => ({
+    '@type': 'Person',
+    name,
+  })),
+  url: Astro.url.href,
+};
 ---
-<BaseLayout title={`${title} — Vinayak Vikram`}>
+<BaseLayout title={`${title} — Vinayak Vikram`} description={description} type="article" structuredData={structuredData}>
   <div class="post-header">
     <h1>{title}</h1>
     <p class="post-date">{date}</p>

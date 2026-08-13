@@ -18,6 +18,6 @@ if (post.data.redirect) {
 
 const { Content } = await render(post);
 ---
-<PostLayout title={post.data.title} date={post.data.date} authors={post.data.authors}>
+<PostLayout title={post.data.title} date={post.data.date} description={post.data.description} authors={post.data.authors}>
   <Content />
 </PostLayout>

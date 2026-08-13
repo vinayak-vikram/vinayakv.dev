@@ -4,9 +4,12 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeExternalLinks from 'rehype-external-links';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   site: 'https://vinayakv.dev',
   output: 'static',
+
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [
@@ -22,4 +25,6 @@ export default defineConfig({
       defaultColor: false,
     },
   },
+
+  integrations: [sitemap()],
 });

@@ -20,7 +20,7 @@ const pdfs = readdirSync(join(process.cwd(), 'public/notes'))
   .map(f => ({ filename: f, label: f.replace(/_\d{4}-\d{2}-\d{2}\.pdf$/, '').replace(/\.pdf$/, ''), date: parseDate(f) }))
   .sort((a, b) => (b.date?.ts ?? 0) - (a.date?.ts ?? 0));
 ---
-<BaseLayout title="Notes — Vinayak Vikram">
+<BaseLayout title="Notes — Vinayak Vikram" description="Vinayak Vikram's collection of notes.">
   <ul class="notes-list">
     {pdfs.map(({ filename, label, date }) => (
       <li>
