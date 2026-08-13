@@ -2,6 +2,7 @@
 title: "SNN-based ADCS implementation"
 date: "August 9, 2026"
 description: "Using a Spiking Neural Network to process multimodal sensor inputs to output a dipole to control a CubeSat via magnetorquers"
+keywords: ["spiking neural network", "SNN", "CubeSat ADCS", "attitude determination and control system", "magnetorquer", "B-dot algorithm", "snnTorch"]
 ---
 
 <github>vinayak-vikram/adcs_snn</github>

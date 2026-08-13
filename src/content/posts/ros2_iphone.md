@@ -2,6 +2,7 @@
 title: "Cross-compiling ROS2 for iPhone"
 date: "March 31, 2026"
 description: "Cross-compiling ROS2 for iPhone. Goal is to bundle basic node and messaging functionality, and maybe a localized python for quick testing purposes."
+keywords: ["ROS2 iOS", "cross-compiling ROS2", "ROS2 iPhone", "CycloneDDS iOS", "ROS2 Jazzy", "colcon cross-compile", "rclcpp iOS", "ios-cmake"]
 ---
 
 <github>vinayak-vikram/vterm</github>
